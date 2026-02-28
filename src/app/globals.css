@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-700: #6D28D9;
+  --color-brand-600: #7C3AED;
+  --color-brand-500: #8B5CF6;
+  --color-brand-400: #A78BFA;
+  --color-brand-300: #C4B5FD;
+  --color-brand-200: #DDD6FE;
+  --color-brand-100: #EDE9FE;
+  --color-brand-50: #F5F3FF;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --animate-gradient: gradient-shift 10s ease infinite;
+  --animate-float: float-orb 13s ease-in-out infinite;
+  --animate-float-2: float-orb-2 16s ease-in-out infinite;
+  --animate-float-3: float-orb 9s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0px)  translateX(0px)  scale(1);    }
+  33%       { transform: translateY(-32px) translateX(18px)  scale(1.04); }
+  66%       { transform: translateY(18px)  translateX(-22px) scale(0.97); }
+}
+
+@keyframes float-orb-2 {
+  0%, 100% { transform: translateY(0px)  translateX(0px)  scale(1);    }
+  33%       { transform: translateY(28px)  translateX(-14px) scale(1.03); }
+  66%       { transform: translateY(-22px) translateX(20px)  scale(0.98); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
