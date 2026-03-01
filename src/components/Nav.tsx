@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isDemo = pathname?.startsWith("/demo");
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
@@ -46,12 +49,18 @@ export default function Nav() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/demo"
-              className="px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-sm"
-            >
-              Try the Demo
-            </Link>
+            {isDemo ? (
+              <span className="px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 bg-white text-slate-300 cursor-default select-none">
+                Try the Demo
+              </span>
+            ) : (
+              <Link
+                href="/demo"
+                className="px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-sm"
+              >
+                Try the Demo
+              </Link>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -98,13 +107,19 @@ export default function Nav() {
             >
               Dashboard
             </Link>
-            <Link
-              href="/demo"
-              onClick={() => setOpen(false)}
-              className="mt-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-brand-600 text-white text-center hover:bg-brand-700 transition-colors"
-            >
-              Try the Demo
-            </Link>
+            {isDemo ? (
+              <span className="mt-2 px-4 py-2.5 text-sm font-semibold rounded-lg border border-slate-200 bg-white text-slate-300 cursor-default select-none text-center">
+                Try the Demo
+              </span>
+            ) : (
+              <Link
+                href="/demo"
+                onClick={() => setOpen(false)}
+                className="mt-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-brand-600 text-white text-center hover:bg-brand-700 transition-colors"
+              >
+                Try the Demo
+              </Link>
+            )}
           </nav>
         </div>
       )}

@@ -1,34 +1,56 @@
 "use client";
 
 import { useRef } from "react";
-import { Upload, FileText, ChevronRight } from "lucide-react";
+import { Upload, FileText, ChevronRight, Info } from "lucide-react";
 import { SAMPLE_DENIAL_LETTER } from "@/lib/mockData";
 
-interface DemoInputProps {
+interface DenialLetterStepProps {
   denialText: string;
   setDenialText: (text: string) => void;
   contextText: string;
   setContextText: (text: string) => void;
-  onGenerate: () => void;
+  onContinue: () => void;
 }
 
-export default function DemoInput({
+const OPTIONAL_DOCS = [
+  "Explanation of Benefits (EOB)",
+  "Summary of Benefits & Coverage",
+  "Letter of Medical Necessity",
+  "Summary Plan Description (SPD)",
+  "Prior Authorization Request",
+  "Other Supporting Documentation",
+];
+
+export default function DenialLetterStep({
   denialText,
   setDenialText,
   contextText,
   setContextText,
-  onGenerate,
-}: DemoInputProps) {
+  onContinue,
+}: DenialLetterStepProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type === "text/plain") {
+      const reader = new FileReader();
+      reader.onload = (ev) => setDenialText((ev.target?.result as string) ?? "");
+      reader.readAsText(file);
+    } else {
+      // For non-text files (PDF, DOCX, images), simulate with sample
+      setDenialText(SAMPLE_DENIAL_LETTER);
+    }
+  };
+
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="text-center mb-10">
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
-          Generate Your Appeal Letter
+    <div>
+      <div className="text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
+          Upload Your Denial Letter
         </h1>
         <p className="text-slate-500 text-lg">
-          Paste your denial letter below or upload a file to get started.
+          Paste or upload your denial letter. It&apos;s the only document required to generate an appeal.
         </p>
       </div>
 
@@ -49,8 +71,6 @@ export default function DemoInput({
             placeholder="Paste the full text of your insurance denial letter here..."
             className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-y transition"
           />
-
-          {/* Helper buttons */}
           <div className="flex flex-wrap gap-3 mt-3">
             <button
               type="button"
@@ -69,15 +89,12 @@ export default function DemoInput({
               <Upload size={15} />
               Upload File
             </button>
-            {/* Cosmetic file input — no real processing */}
             <input
               ref={fileInputRef}
               type="file"
               accept=".pdf,.docx,.txt,.png,.jpg,.jpeg"
               className="hidden"
-              onChange={() => {
-                /* cosmetic only — file is not processed */
-              }}
+              onChange={handleFileChange}
             />
           </div>
           {denialText && (
@@ -97,7 +114,7 @@ export default function DemoInput({
             <span className="text-slate-400 font-normal">(optional)</span>
           </label>
           <p className="text-xs text-slate-400 mb-2">
-            Include any relevant details: diagnosis, prior treatment history, dates, provider notes.
+            Include relevant details: diagnosis, treatment history, provider notes.
           </p>
           <textarea
             id="context"
@@ -109,15 +126,35 @@ export default function DemoInput({
           />
         </div>
 
-        {/* Generate Button */}
+        {/* Optional docs notice */}
+        <div className="rounded-xl bg-slate-50 border border-slate-100 px-4 py-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Info size={14} className="text-slate-400 shrink-0" />
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              Optional documents you can add in the next steps
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {OPTIONAL_DOCS.map((doc) => (
+              <span
+                key={doc}
+                className="text-xs text-slate-500 bg-white border border-slate-200 rounded-full px-2.5 py-1"
+              >
+                {doc}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Continue Button */}
         <div className="pt-2">
           <button
             type="button"
-            onClick={onGenerate}
+            onClick={onContinue}
             disabled={!denialText.trim()}
             className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-brand-600 text-white font-bold text-base hover:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
           >
-            Generate Appeal Letter
+            Continue with Appeal Generation
             <ChevronRight size={20} />
           </button>
           {!denialText.trim() && (

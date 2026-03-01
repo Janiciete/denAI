@@ -52,6 +52,135 @@ Aetna Health Insurance
 
 This determination is based on the benefit plan provisions and the clinical information provided at the time of review.`;
 
+export const SAMPLE_EOB = `AETNA HEALTH INSURANCE
+EXPLANATION OF BENEFITS (EOB)
+
+Member Name: [Your Name]                      Member ID: AET-7842310
+Group Name: ABC Employer, Inc.                Group Number: GRP-00419841
+Plan Name: Aetna Select Plus HMO              Claim Number: CLM-2026-00184732
+
+DATE OF SERVICE: January 8, 2026
+PROVIDER: Dr. Steven Ortega, MD — Orthopedic Surgery Associates
+FACILITY: Regional Medical Center, 100 Hospital Drive, Anytown, USA
+
+─────────────────────────────────────────────────────────────────────────────
+CLAIM DETAIL
+─────────────────────────────────────────────────────────────────────────────
+Code   Description                              Billed        Eligible    Plan Paid   You Owe
+───────────────────────────────────────────────────────────────────────────────────────────
+27447  Total Right Knee Arthroplasty            $42,800.00    $0.00       $0.00       $0.00
+00400  Anesthesia — Extremity Procedure         $3,200.00     $0.00       $0.00       $0.00
+99213  Office/Outpatient Visit (Post-Op)        $320.00       $0.00       $0.00       $0.00
+───────────────────────────────────────────────────────────────────────────────────────────
+TOTAL                                           $46,320.00    $0.00       $0.00       $0.00
+
+─────────────────────────────────────────────────────────────────────────────
+CLAIM DECISION: DENIED
+─────────────────────────────────────────────────────────────────────────────
+Denial Code: MN-04 — Not Medically Necessary
+
+Reason: Documentation submitted does not meet clinical criteria for Total
+Knee Arthroplasty per Aetna Clinical Policy Bulletin #0655. Conservative
+treatments have not been sufficiently documented as having failed, and
+pre-operative imaging is more than 12 months old.
+
+This claim is NOT eligible for payment under your current plan.
+
+─────────────────────────────────────────────────────────────────────────────
+YEAR-TO-DATE ACCUMULATORS
+─────────────────────────────────────────────────────────────────────────────
+                              Used to Date       Plan Maximum
+Individual Deductible         $1,500.00          $1,500.00  ✓ Met
+Individual Out-of-Pocket      $1,200.00          $6,000.00
+Family Deductible             $1,500.00          $3,000.00
+
+─────────────────────────────────────────────────────────────────────────────
+YOUR APPEAL RIGHTS
+─────────────────────────────────────────────────────────────────────────────
+You have 180 days from the date of this notice to file a written appeal.
+Submit additional clinical documentation addressing the above deficiencies to:
+  Aetna Appeals Department
+  P.O. Box 14463, Lexington, KY 40512
+  Phone: 1-800-783-1378
+
+─────────────────────────────────────────────────────────────────────────────
+This EOB is not a bill. It is a record of how your claim was processed.
+Questions? Call Member Services: 1-800-872-3862 | aetna.com
+EOB Date: January 15, 2026
+─────────────────────────────────────────────────────────────────────────────`;
+
+export const SAMPLE_SBC = `SUMMARY OF BENEFITS AND COVERAGE (SBC)
+Coverage Period: January 1, 2026 – December 31, 2026
+
+Plan Name: Aetna Select Plus HMO
+Employer/Group: ABC Employer, Inc. | Group: GRP-00419841
+Coverage For: Individual + Family | Plan Type: HMO
+
+─────────────────────────────────────────────────────────────────────────────
+IMPORTANT QUESTIONS                    ANSWERS                   WHY THIS MATTERS
+─────────────────────────────────────────────────────────────────────────────
+Overall deductible                     $1,500/Individual          You must pay this amount
+                                       $3,000/Family              before the plan starts paying.
+Out-of-pocket maximum                  $6,000/Individual          The most you'll pay in a year.
+                                       $12,000/Family             Plan covers 100% after this.
+Is there a referral required?          Yes                        You'll need a referral to see
+                                                                  a specialist.
+
+─────────────────────────────────────────────────────────────────────────────
+COMMON MEDICAL EVENT                   SERVICES YOU MAY NEED      WHAT YOU PAY
+─────────────────────────────────────────────────────────────────────────────
+Primary care visit (illness/injury)    PCP visit                  $30 copay
+Specialist visit                       Specialist                 $60 copay
+Preventive care                        Screening/vaccines         No charge
+Outpatient mental/behavioral health    Outpatient visit           $60 copay
+
+TESTS
+  Diagnostic test (x-ray, blood work)  Lab tests                  20% after deductible
+  Imaging (CT, PET, MRI)               Imaging                    20% after deductible
+                                        Prior authorization req'd
+
+SURGERY
+  Physician/surgeon fees               Outpatient surgery          20% after deductible
+  Facility fees                        Outpatient surgery          20% after deductible
+                                        Prior authorization req'd for major procedures
+
+HOSPITAL STAY
+  Facility fees                        Inpatient hospital stay     20% after deductible
+  Physician/surgeon fees               Inpatient hospital stay     20% after deductible
+                                        Prior authorization required
+
+JOINT REPLACEMENT SURGERY (e.g., CPT 27447 — Total Knee Arthroplasty):
+  Coverage:                  Covered when medically necessary per Aetna CPB #0655
+  Medical Necessity Criteria: Must document ≥3 months of failed conservative
+                               treatment (PT, injections, medications); current
+                               imaging required (within 12 months of surgery)
+  Prior Authorization:       REQUIRED
+  Your Cost:                 20% coinsurance after $1,500 deductible
+                              (~$8,000–$9,500 estimated member cost on a
+                               $42,800 billed claim)
+
+REHABILITATION SERVICES
+  Physical therapy           Physical therapy visit       $30 copay/visit
+  Occupational therapy       OT visit                     $30 copay/visit
+  Annual limit: 60 visits/year combined PT/OT
+  Prior authorization required after 20 visits
+
+─────────────────────────────────────────────────────────────────────────────
+EXCLUDED SERVICES (not covered):
+• Services not medically necessary per plan clinical criteria
+• Experimental or investigational procedures
+• Services not pre-authorized when required
+• Out-of-network services (HMO plan)
+
+─────────────────────────────────────────────────────────────────────────────
+For claims appeals, contact:
+Aetna Appeals Department | P.O. Box 14463, Lexington, KY 40512
+
+This SBC is a summary only. Review your full Summary Plan Description (SPD)
+for complete benefit terms and conditions.
+SBC Date: January 1, 2026
+─────────────────────────────────────────────────────────────────────────────`;
+
 export const MOCK_APPEAL_LETTER = `[Your Name]
 [Your Address]
 [City, State ZIP]
