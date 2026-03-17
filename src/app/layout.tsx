@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DenAI — Fight Your Insurance Denial",
+  title: "Vitalis — Your Insurance Appeal, Simplified",
   description:
-    "80% of insurance appeals win. Almost nobody files. DenAI turns your denial letter into a complete appeal in minutes.",
+    "80% of insurance appeals win. Almost nobody files. Vitalis turns your denial letter into a complete appeal in minutes — saving you time, money, and stress.",
 };
 
 export default function RootLayout({

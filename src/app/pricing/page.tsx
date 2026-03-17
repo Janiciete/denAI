@@ -9,16 +9,16 @@ type Tab = "employer" | "provider";
 
 const FAQS = [
   {
-    q: "How does DenAI generate appeal letters?",
-    a: "DenAI analyzes your denial letter to identify the denial reason, relevant CPT codes, and the insurer's stated clinical criteria. It then drafts a personalized appeal letter that directly addresses each deficiency cited by the insurer, referencing applicable clinical guidelines and peer-reviewed evidence.",
+    q: "How does Vitalis generate appeal letters?",
+    a: "Vitalis analyzes your denial letter to identify the denial reason, relevant CPT codes, and the insurer's stated clinical criteria. It then drafts a personalized appeal letter that directly addresses each deficiency cited by the insurer, referencing applicable clinical guidelines and peer-reviewed evidence.",
   },
   {
-    q: "Is DenAI HIPAA compliant?",
+    q: "Is Vitalis HIPAA compliant?",
     a: "Yes. All plans include a full BAA (Business Associate Agreement). All data is encrypted in transit and at rest. We do not sell or share member health data with any third parties.",
   },
   {
-    q: "What types of denials does DenAI support?",
-    a: "DenAI supports the most common denial categories including: Medical Necessity (MN), Prior Authorization (PA), Experimental/Investigational (EX), Coordination of Benefits (COB), and Coding/Bundling denials (CO). New denial types are added regularly.",
+    q: "What types of denials does Vitalis support?",
+    a: "Vitalis supports the most common denial categories including: Medical Necessity (MN), Prior Authorization (PA), Experimental/Investigational (EX), Coordination of Benefits (COB), and Coding/Bundling denials (CO). New denial types are added regularly.",
   },
   {
     q: "Do you offer a free trial?",
@@ -63,7 +63,6 @@ function PricingCard({ tier }: { tier: PricingTier }) {
           {tier.tagline}
         </p>
 
-        {/* Price display — only for tiers that have published pricing */}
         {hasPrice && (
           <div className="mt-3 mb-2">
             <span
@@ -134,10 +133,10 @@ function PricingCard({ tier }: { tier: PricingTier }) {
         )}
         <a
           href="mailto:jja87@cornell.edu"
-          className={`flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-bold text-sm transition-colors ${
+          className={`flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 ${
             tier.highlighted
-              ? "bg-white text-brand-700 hover:bg-brand-50"
-              : "bg-brand-600 text-white hover:bg-brand-700"
+              ? "bg-white text-brand-700 hover:bg-brand-50 hover:shadow-md"
+              : "bg-brand-600 text-white hover:bg-brand-700 hover:shadow-md hover:shadow-brand-200/50"
           }`}
         >
           <Mail size={15} />
@@ -151,7 +150,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-slate-200 rounded-xl overflow-hidden">
+    <div className="border border-slate-200 rounded-xl overflow-hidden transition-all duration-200">
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -161,16 +160,20 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         <span className="font-semibold text-slate-900 text-sm sm:text-base pr-4">{q}</span>
         <ChevronDown
           size={18}
-          className={`text-slate-400 shrink-0 transition-transform duration-200 ${
+          className={`text-slate-400 shrink-0 transition-transform duration-300 ${
             open ? "rotate-180" : ""
           }`}
         />
       </button>
-      {open && (
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-100">
           <p className="text-sm text-slate-600 leading-relaxed">{a}</p>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -196,19 +199,19 @@ export default function PricingPage() {
             href="/"
             className="inline-flex items-center gap-1 mt-6 text-sm text-brand-600 hover:text-brand-700 font-medium transition-colors"
           >
-            ← Back to Home
+            &larr; Back to Home
           </Link>
         </div>
       </section>
 
       {/* Tab Switcher */}
-      <section className="sticky top-16 z-10 bg-white border-b border-slate-200 py-4">
+      <section className="sticky top-16 z-10 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex justify-center">
           <div className="inline-flex rounded-xl bg-slate-100 p-1">
             <button
               type="button"
               onClick={() => setActiveTab("employer")}
-              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "employer"
                   ? "bg-white text-brand-700 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"
@@ -219,7 +222,7 @@ export default function PricingPage() {
             <button
               type="button"
               onClick={() => setActiveTab("provider")}
-              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                 activeTab === "provider"
                   ? "bg-white text-brand-700 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"
@@ -241,7 +244,7 @@ export default function PricingPage() {
               href="mailto:jja87@cornell.edu"
               className="font-semibold underline hover:no-underline"
             >
-              Email us to confirm your rate →
+              Email us to confirm your rate &rarr;
             </a>
           </div>
         </div>
@@ -302,8 +305,9 @@ export default function PricingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-brand-700 py-16">
-        <div className="max-w-2xl mx-auto px-4 text-center">
+      <section className="bg-brand-700 py-16 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-brand-600/20 to-transparent pointer-events-none" />
+        <div className="relative max-w-2xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-3">
             Ready to start winning appeals?
           </h2>
@@ -314,13 +318,13 @@ export default function PricingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/demo"
-              className="inline-block px-8 py-3.5 rounded-xl bg-white text-brand-700 font-bold hover:bg-brand-50 transition-colors"
+              className="inline-block px-8 py-3.5 rounded-xl bg-white text-brand-700 font-bold hover:bg-brand-50 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
             >
               Try the Demo Free
             </Link>
             <a
               href="mailto:jja87@cornell.edu"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border-2 border-brand-400 text-white font-semibold hover:bg-brand-600 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border-2 border-brand-400 text-white font-semibold hover:bg-brand-600 transition-all duration-200 hover:-translate-y-0.5"
             >
               <Mail size={16} />
               Contact Us

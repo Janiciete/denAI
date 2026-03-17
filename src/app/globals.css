@@ -18,12 +18,14 @@
   --animate-float-3: float-orb 9s ease-in-out infinite;
 }
 
+/* ── Gradient shift (hero background) ── */
 @keyframes gradient-shift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* ── Floating orbs ── */
 @keyframes float-orb {
   0%, 100% { transform: translateY(0px)  translateX(0px)  scale(1);    }
   33%       { transform: translateY(-32px) translateX(18px)  scale(1.04); }
@@ -36,6 +38,124 @@
   66%       { transform: translateY(-22px) translateX(20px)  scale(0.98); }
 }
 
+/* ── Shimmer sweep (badges, cards) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Glow pulse (primary CTA buttons) ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+  50%      { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6), 0 0 60px rgba(124, 58, 237, 0.2); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Animated gradient text ── */
+@keyframes text-gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(90deg, #C4B5FD, #ffffff, #DDD6FE, #ffffff, #A78BFA);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-gradient 6s ease infinite;
+}
+
+/* ── Scale bounce entrance ── */
+@keyframes scale-in {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+/* ── Slide up entrance ── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+/* ── Heartbeat pulse (logo accent) ── */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.05); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.03); }
+  56%      { transform: scale(1); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* ── Subtle border glow ── */
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(124, 58, 237, 0.2); }
+  50%      { border-color: rgba(124, 58, 237, 0.5); }
+}
+
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* ── Floating particle ── */
+@keyframes float-particle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0); }
+  10%      { opacity: 1; transform: scale(1); }
+  90%      { opacity: 0.5; }
+  100%     { opacity: 0; transform: translateY(-120px) scale(0); }
+}
+
+/* ── Ticker tape number roll ── */
+@keyframes tick-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-tick-in {
+  animation: tick-in 0.3s ease-out forwards;
+}
+
+/* ── Draw stroke (for SVG paths) ── */
+@keyframes draw-stroke {
+  from { stroke-dashoffset: 200; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.animate-draw {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw-stroke 1.5s ease-out forwards;
+}
+
+/* ── Smooth scroll ── */
 html {
   scroll-behavior: smooth;
 }
