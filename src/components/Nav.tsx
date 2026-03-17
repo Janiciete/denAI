@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import VitalisLogo from "@/components/VitalisLogo";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -11,12 +12,12 @@ export default function Nav() {
   const isDemo = pathname?.startsWith("/demo");
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span className="text-slate-900">Den</span><span className="text-brand-600">AI</span>
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <VitalisLogo size="sm" variant="dark" />
           </Link>
 
           {/* Desktop nav */}
@@ -56,7 +57,7 @@ export default function Nav() {
             ) : (
               <Link
                 href="/demo"
-                className="px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition-colors shadow-sm"
+                className="px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition-all duration-200 shadow-sm hover:shadow-md hover:shadow-brand-200/50 hover:-translate-y-0.5"
               >
                 Try the Demo
               </Link>
@@ -77,7 +78,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pb-4 pt-2">
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 pb-4 pt-2 animate-slide-up">
           <nav className="flex flex-col gap-1">
             <Link
               href="/#how-it-works"
